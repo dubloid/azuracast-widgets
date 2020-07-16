@@ -1,3 +1,5 @@
+Thanks to jesseward for the excellent basis for displaying information from the radio station!
+
 # azuracast-widgets
 Repo of JS/CSS widgets that interact with the AzuraCast API. These widgets are to be embeded or implemented in sites that host Azuracast stations.
 
