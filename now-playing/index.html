@@ -4,25 +4,39 @@ Added function setInterval for automatic update script after a specified period 
 
 -->
 
-
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AzuraCast Now Playing Widget</title>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js"></script>
+	</head>
+	<body>
 	<script type="text/javascript">
 		setInterval(function(){
 			// location of the AzuraCast API .
-			var stationAPILocation = '//your.host/api/nowplaying/1';
-			var text = document.querySelector('.text');
-			var listeners = document.querySelector('.listeners');
-			var livedj = document.querySelector('.livedj');
+			var stationAPILocation = '//your.host/api/nowplaying/1'; // change api address to your station!
+			var text = document.querySelector('.text'); // why 'text' ? Because this field best displays the data of the current song.
+			var listeners = document.querySelector('.listeners'); // total views at a given time.
+			var livedj = document.querySelector('.livedj'); // displays the name of the DJ if he is currently connected.
 			var nowPlayingWidget = document.querySelector('.play');
 
 			axios.get(stationAPILocation)
 					.then(function (response) {
-						text.innerHTML = response.data.now_playing.song.text;
-						listeners.innerHTML = response.data.listeners.total;
-						livedj.innerHTML = response.data.live.streamer_name;
+						text.innerHTML = response.data.now_playing.song.text; // path to text.
+						listeners.innerHTML = response.data.listeners.total; // path to total listeners.
+						livedj.innerHTML = response.data.live.streamer_name; // path to streamer name (DJ).
 					})
 					// default catchall error handling, in the event of a GET failure.
 					.catch(function (error) {
-						nowPlayingWidget.innerHTML = '<center><b>(!) Please refresh this page (!)</b></center>';
+						nowPlayingWidget.innerHTML = '<b>(!) Please refresh this page (!)</b>';
 					});
 		}, 3000);
 	</script>
+	
+	<div class="now-playing-widget">
+		<span class="text">
+		<span class="listeners">
+		<span class="livedj">
+	</div>
+	</body>
+</html>
