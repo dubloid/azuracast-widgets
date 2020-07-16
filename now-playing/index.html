@@ -18,7 +18,6 @@ Added function setInterval for automatic update script after a specified period 
 			var text = document.querySelector('.text'); // why 'text' ? Because this field best displays the data of the current song.
 			var listeners = document.querySelector('.listeners'); // total views at a given time.
 			var livedj = document.querySelector('.livedj'); // displays the name of the DJ if he is currently connected.
-			var nowPlayingWidget = document.querySelector('.play');
 
 			axios.get(stationAPILocation)
 					.then(function (response) {
@@ -28,12 +27,12 @@ Added function setInterval for automatic update script after a specified period 
 					})
 					// default catchall error handling, in the event of a GET failure.
 					.catch(function (error) {
-						nowPlayingWidget.innerHTML = '<b>(!) Please refresh this page (!)</b>';
+						nowPlayingWidget.innerHTML = '<b>Unable to load now playing data</b>';
 					});
 		}, 3000);
 	</script>
 	
-	<div class="now-playing-widget">
+	<div class="your_css_class_name">
 		<span class="text">
 		<span class="listeners">
 		<span class="livedj">
