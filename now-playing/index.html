@@ -1,1 +1,28 @@
-<!-- AzuraCast radio API widget -->
+<!-- modified AzuraCast radio API widget.
+
+Added function setInterval for automatic update script after a specified period of time (in this example time = 3000 milliseconds or 3 seconds)
+
+-->
+
+
+	<script type="text/javascript">
+		setInterval(function(){
+			// location of the AzuraCast API .
+			var stationAPILocation = '//your.host/api/nowplaying/1';
+			var text = document.querySelector('.text');
+			var listeners = document.querySelector('.listeners');
+			var livedj = document.querySelector('.livedj');
+			var nowPlayingWidget = document.querySelector('.play');
+
+			axios.get(stationAPILocation)
+					.then(function (response) {
+						text.innerHTML = response.data.now_playing.song.text;
+						listeners.innerHTML = response.data.listeners.total;
+						livedj.innerHTML = response.data.live.streamer_name;
+					})
+					// default catchall error handling, in the event of a GET failure.
+					.catch(function (error) {
+						nowPlayingWidget.innerHTML = '<center><b>(!) Please refresh this page (!)</b></center>';
+					});
+		}, 3000);
+	</script>
