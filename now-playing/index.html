@@ -9,15 +9,25 @@ Added function setInterval for automatic update script after a specified period 
 	<head>
 		<title>AzuraCast Now Playing Widget</title>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js"></script>
+		<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 	</head>
 	<body>
 	<script type="text/javascript">
-		setInterval(function(){
+		async = setInterval(function(){
 			// location of the AzuraCast API .
 			var stationAPILocation = '//your.host/api/nowplaying/1'; // change api address to your station!
 			var text = document.querySelector('.text'); // why 'text' ? Because this field best displays the data of the current song.
 			var listeners = document.querySelector('.listeners'); // total views at a given time.
 			var livedj = document.querySelector('.livedj'); // displays the name of the DJ if he is currently connected.
+			var nowPlayingWidget = document.querySelector('.play');
+			var promise = new Promise(function (resolve, reject) {
+				setTimeout(function () {
+					resolve('update widget info every 2 seconds');
+				}, 2000);
+			});
+			promise.then(function(result) {
+				console.log(result);
+			});
 
 			axios.get(stationAPILocation)
 					.then(function (response) {
