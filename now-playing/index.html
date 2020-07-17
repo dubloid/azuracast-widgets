@@ -20,6 +20,7 @@ Added function setInterval for automatic update script after a specified period 
 			var listeners = document.querySelector('.listeners'); // total views at a given time.
 			var livedj = document.querySelector('.livedj'); // displays the name of the DJ if he is currently connected.
 			var nowPlayingWidget = document.querySelector('.play');
+			// fix Getting Error Promise is undefined in IE11.
 			var promise = new Promise(function (resolve, reject) {
 				setTimeout(function () {
 					resolve('update widget info every 2 seconds');
@@ -28,7 +29,7 @@ Added function setInterval for automatic update script after a specified period 
 			promise.then(function(result) {
 				console.log(result);
 			});
-
+			// end fix Getting Error Promise is undefined in IE11.
 			axios.get(stationAPILocation)
 					.then(function (response) {
 						text.innerHTML = response.data.now_playing.song.text; // path to text.
